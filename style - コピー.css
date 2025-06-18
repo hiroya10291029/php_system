@@ -1,0 +1,293 @@
+/* style.css */
+
+/* Google Fonts: 読みやすく、プロフェッショナルな印象のフォントを読み込む */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+/* 基本リセットとフォント設定 */
+body {
+    margin: 0;
+    font-family: 'Noto Sans JP', 'Roboto', sans-serif; /* 日本語と英語で適切なフォントを指定 */
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f8f8; /* 全体の背景色を少し明るく */
+}
+
+/* ヘッダー */
+.header {
+    background-color: #2c3e50; /* ダークネイビー */
+    color: #ffffff;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* 要素間のスペースを均等に分配 */
+    align-items: center; /* これが垂直方向の中央揃えの肝 */
+    padding: 0 20px;
+    flex-wrap: wrap; /* 要素が収まらない場合に折り返す */
+}
+
+.logo {
+    font-size: 28px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap; /* ロゴが改行されないように */
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* ナビゲーションアイテム間のスペース */
+    align-items: center; /* リストアイテムも垂直中央揃え */
+}
+
+.main-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+/* ヘッダーナビゲーションリンクのホバー色を修正 */
+.main-nav a:hover {
+    color: #f39c12; /* アクセントカラーのオレンジ/ゴールド系に（維持） */
+    text-decoration: underline;
+}
+
+/* 汎用的なアクションボタンのスタイル */
+.action-button {
+    background-color: #f39c12; 
+    color: white !important;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none !important;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/*募集職種を見るボタン */
+.action-button0 {
+    background-color: #f39c12; 
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none !important;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* 汎用的なアクションボタンのホバー効果 */
+.action-button:hover {
+    background-color: #e67e22; /* より濃いオレンジ/ゴールドに（維持） */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 汎用的なアクションボタンのホバー効果 */
+/*募集職種を見るボタン */
+.action-button0:hover {
+    background-color: #e67e22; /* より濃いオレンジ/ゴールドに（維持） */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ログアウトボタンのスタイルを強化（前回からの継続） */
+.main-nav .action-button[href="logout.php"] {
+    background-color: #e74c3c; /* 赤色系は維持 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-nav .action-button[href="logout.php"]:hover {
+    background-color: #c0392b; /* ホバーでより濃い赤色に */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+
+/* ユーザー情報表示のスタイル */
+.user-info {
+    color: #ecf0f1;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+/* メインコンテンツの共通スタイル */
+.main-content {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ページタイトル下線とセクションヘッダー下線色を修正 */
+.page-title {
+    font-size: 32px;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #5a80a2; /* 暗めの青系に */
+    padding-bottom: 15px;
+}
+
+.section-block {
+    background-color: #f9f9f9;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+.section-block h3 {
+    color: #34495e;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #a4c6e0; /* 暗めの薄い青の点線に */
+    padding-bottom: 10px;
+}
+
+.section-block p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.section-block ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.section-block li {
+    margin-bottom: 8px;
+}
+
+/* フォームの共通スタイル */
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form select,
+.contact-form textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form button[type="submit"] {
+    background-color: #5a80a2; /* フォームの送信ボタンも暗めの青系に */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button[type="submit"]:hover {
+    background-color: #4a6d8f; /* ホバーでより濃い青に */
+}
+
+/* メッセージエリアのスタイル */
+.message-area {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #e0f2f7; /* 明るい青系の背景 */
+    border: 1px solid #5a80a2; /* 暗めの青系のボーダー */
+}
+.message-area p {
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+}
+.message-area p[style*="color: red"] {
+    background-color: #ffe6e6;
+    border: 1px solid #FF0000;
+}
+
+
+/* フッター */
+.footer {
+    background-color: #34495e; /* ダークグレー */
+    color: #ecf0f1;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 50px;
+    font-size: 14px;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer a {
+    color: #f39c12; /* フッターリンクもアクセントカラーに（維持） */
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-nav {
+        width: 100%;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-info {
+        margin-top: 15px;
+        margin-left: 0;
+        order: -1;
+    }
+
+    .main-nav .action-button[href="logout.php"] {
+        width: fit-content;
+        margin-top: 10px;
+    }
+}
