@@ -220,7 +220,7 @@ $conn->close();
                 <ul>
                     <li><a href="admin_dashboard.php">ダッシュボード</a></li>
                     <li><a href="user_management.php">ユーザー管理</a></li>
-                    <li><a href="inquiry_management.php">お問い合わせ</a></li>
+                    <li><a href="inquiry_management.php">お問い合わせ管理</a></li>
                     <li><a href="logout.php" class="action-button">ログアウト</a></li>
                 </ul>
             </nav>
@@ -235,21 +235,29 @@ $conn->close();
     <main class="main-content">
         <h1 class="page-title">ユーザー管理</h1>
 
-        <section class="user-management-section">
-            <div class="search-form">
-                <form action="user_management.php" method="get">
-                    <label for="search_username">ユーザー名で検索:</label>
-                    <input type="text" id="search_username" name="search_username" 
-                           value="<?php echo htmlspecialchars($search_username); ?>" 
-                           placeholder="ユーザー名を入力">
-                    <input type="hidden" name="sort_column" value="<?php echo htmlspecialchars($sort_column); ?>">
-                    <input type="hidden" name="sort_order" value="<?php echo htmlspecialchars($sort_order); ?>">
-                    <button type="submit">検索</button>
-                    <?php if (!empty($search_username)): ?>
-                        <a href="user_management.php" class="action-button" style="background-color: #6c757d; margin-left: 10px;">検索クリア</a>
-                    <?php endif; ?>
-                </form>
-            </div>
+
+
+<section class="user-management-section">
+    <div class="search-controls">
+        <div class="search-form-wrapper"> <form action="user_management.php" method="get">
+                <label for="search_username">ユーザー名で検索:</label>
+                <input type="text" id="search_username" name="search_username"
+                       value="<?php echo htmlspecialchars($search_username); ?>"
+                       placeholder="ユーザー名を入力">
+                <input type="hidden" name="sort_column" value="<?php echo htmlspecialchars($sort_column); ?>">
+                <input type="hidden" name="sort_order" value="<?php echo htmlspecialchars($sort_order); ?>">
+                <button type="submit">検索</button>
+                <?php if (!empty($search_username)): ?>
+                    <a href="user_management.php" class="action-button clear-search-button">検索クリア</a>
+                <?php endif; ?>
+            </form>
+    </div>
+        <div class="add-user-button-container">
+            <a href="user_register.php" class="action-button register-user-button">新規ユーザー登録</a>
+        </div>
+        </div>
+
+
 
             <table class="user-table">
                 <thead>

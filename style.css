@@ -63,7 +63,7 @@ body {
 
 /* 汎用的なアクションボタンのスタイル */
 .action-button {
-    background-color: #f39c12; 
+    background-color: #f39c12;
     color: white !important;
     padding: 5px 10px;
     border-radius: 5px;
@@ -71,32 +71,11 @@ body {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     white-space: nowrap;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-block; /* aタグにpaddingを適用するために必要 */
 }
-
-
-/*募集職種を見るボタン */
-.action-button0 {
-    background-color: #f39c12; 
-    color: white !important;
-    padding: 8px 16px;
-    border-radius: 5px;
-    text-decoration: none !important;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    white-space: nowrap;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 
 /* 汎用的なアクションボタンのホバー効果 */
 .action-button:hover {
-    background-color: #e67e22; /* より濃いオレンジ/ゴールドに（維持） */
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 汎用的なアクションボタンのホバー効果 */
-/*募集職種を見るボタン */
-.action-button0:hover {
     background-color: #e67e22; /* より濃いオレンジ/ゴールドに（維持） */
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -177,26 +156,35 @@ body {
     margin-bottom: 8px;
 }
 
+/* セクション内の画像に対するスタイル */
+.section-block img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
 /* フォームの共通スタイル */
 .contact-form label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
     color: #333;
-    white-space: nowrap; /* ★追加★ ラベルのテキストが改行されないように */
+    white-space: nowrap; /* ラベルのテキストが改行されないように */
 }
 
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form select,
 .contact-form textarea {
-    width: calc(100% - 22px);
+    width: calc(100% - 20px); /* 左右のpaddingを考慮して20px引く */
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    box-sizing: border-box;
+    box-sizing: border-box; /* paddingとborderをwidthに含める */
 }
 
 .contact-form textarea {
@@ -245,7 +233,7 @@ body {
     color: #ecf0f1;
     text-align: center;
     padding: 25px 0;
-    margin-top: 50px;
+    margin-top: 50px; /* 他のページとの統一のため調整 */
     font-size: 14px;
 }
 
@@ -262,7 +250,554 @@ body {
     text-decoration: underline;
 }
 
+/* ========================================================== */
+/* user_management.php および user_edit.php 専用のスタイル調整 */
+/* ========================================================== */
+
+/* 管理系ページのメインコンテンツの調整 */
+/* 共通の.main-contentスタイルを適用しつつ、管理画面特有の最大幅を設定 */
+.admin-main-content {
+    max-width: 1000px; /* user_management.phpでの設定を反映 */
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+
+.user-management-section h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* 新しいフレックスコンテナで検索フォームと新規登録ボタンを横並びにする */
+.search-controls {
+    display: flex; /* これが肝 */
+    justify-content: space-between; /* 要素間のスペースを均等に */
+    align-items: center; /* 垂直方向の中央揃え */
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    flex-wrap: wrap; /* 小さい画面で折り返す */
+    gap: 15px; /* 要素間の隙間 */
+}
+
+/* 検索フォームのスタイル (formタグをラップするdivに適用) */
+.search-form-wrapper form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* 検索要素も折り返す */
+}
+
+.search-form-wrapper label {
+    font-weight: bold;
+    color: #333;
+    flex-shrink: 0; /* 縮小しない */
+}
+
+.search-form-wrapper input[type="text"] {
+    flex-grow: 1; /* 利用可能なスペースを埋める */
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    max-width: 300px; /* 検索フィールドの最大幅 */
+    min-width: 150px; /* 最小幅 */
+}
+
+.search-form-wrapper button {
+    padding: 10px 20px;
+    background-color: #007bff; /* 青系ボタン */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.search-form-wrapper button:hover {
+    background-color: #0056b3;
+}
+
+/* 検索クリアボタンのスタイル */
+.action-button.clear-search-button {
+    background-color: #6c757d; /* 灰色 */
+    color: white !important; /* !important を付けて強制 */
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+    display: inline-block; /* aタグをボタンのように表示 */
+}
+
+.action-button.clear-search-button:hover {
+    background-color: #5a6268;
+}
+
+/* 新規ユーザー登録ボタンのコンテナスタイル */
+.add-user-button-container {
+    flex-shrink: 0; /* ボタンコンテナが縮まないように */
+    text-align: right; /* 元の右寄せを維持したい場合 */
+    /* flexコンテナのアイテムとして中央揃えになるため、特定の調整は不要 */
+}
+
+/* 新規ユーザー登録ボタン自体のスタイル */
+.action-button.register-user-button {
+    background-color: #28a745; /* 緑色 */
+    color: white !important; /* !important を付けて強制 */
+    text-decoration: none;
+    padding: 12px 25px; /* ボタンのパディングを調整 */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* aタグをボタンのように表示 */
+}
+
+.action-button.register-user-button:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+/* ユーザーテーブルのスタイル */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th,
+.user-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #eef7ff; /* ヘッダーの背景色 */
+    color: #333;
+    font-weight: bold;
+    cursor: pointer; /* ソート可能を示す */
+    position: relative;
+}
+
+.user-table th:hover {
+    background-color: #e0f0ff;
+}
+
+.user-table th .sort-indicator {
+    position: absolute;
+    right: 10px;
+    font-size: 0.8em;
+    color: #666;
+}
+
+.user-table tr {
+    cursor: pointer; /* 行がクリック可能であることを示す */
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* 偶数行の背景色 */
+}
+
+.user-table tr:hover {
+    background-color: #f1f1f1; /* ホバー時の背景色 */
+}
+
+/* ========================================================== */
+/* user_edit.php 専用のスタイル調整 */
+/* ========================================================== */
+.edit-form-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form-container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #5a80a2;
+}
+
+.edit-form-container form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.edit-form-container form input[type="text"],
+.edit-form-container form input[type="password"],
+.edit-form-container form input[type="email"] {
+    width: calc(100% - 20px); /* Paddingを考慮 */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.edit-form-container .form-actions {
+    display: flex;
+    justify-content: flex-end; /* 右寄せ */
+    gap: 15px; /* ボタン間のスペース */
+    margin-top: 30px;
+}
+
+.edit-form-container .form-actions button,
+.edit-form-container .form-actions a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* aタグもボタンのように表示 */
+    text-align: center;
+}
+
+.edit-form-container .form-actions button[type="submit"] {
+    background-color: #007bff; /* 青系 */
+    color: white;
+    border: none;
+}
+
+.edit-form-container .form-actions button[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.edit-form-container .form-actions .delete-button {
+    background-color: #dc3545; /* 赤系 */
+    color: white;
+    border: none;
+}
+
+.edit-form-container .form-actions .delete-button:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.edit-form-container .form-actions .back-button {
+    background-color: #6c757d; /* 灰色 */
+    color: white !important;
+    border: none;
+}
+
+.edit-form-container .form-actions .back-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+/* ========================================================== */
+/* login.php & admin_login.php 専用のスタイル調整 */
+/* ========================================================== */
+.login-container {
+    max-width: 400px;
+    margin: 80px auto; /* 上下のマージンを大きくして中央に */
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    font-size: 32px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.login-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: calc(100% - 20px); /* paddingを考慮 */
+    padding: 12px; /* パディングを増やす */
+    margin-bottom: 20px; /* マージンを増やす */
+    border: 1px solid #ddd;
+    border-radius: 5px; /* 角丸を少し大きく */
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.login-container input[type="submit"] {
+    background-color: #5a80a2; /* フォームの送信ボタンと同じ青系に */
+    color: white;
+    padding: 12px 15px; /* パディングを増やす */
+    border: none;
+    border-radius: 5px; /* 角丸を少し大きく */
+    cursor: pointer;
+    font-size: 18px; /* フォントサイズを大きく */
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.login-container input[type="submit"]:hover {
+    background-color: #4a6d8f; /* ホバーでより濃い青に */
+    transform: translateY(-1px); /* 少し浮き上がる効果 */
+}
+
+/* ログインページのメッセージ（エラー、ログアウト成功など） */
+.login-container .error,
+.login-container .message-area p[style*="color: green"] { /* 成功メッセージも対象に含める */
+    background-color: #ffe6e6;
+    border: 1px solid #FF0000;
+    color: #d8000c; /* より視認性の高い赤 */
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+.login-container .message-area p[style*="color: green"] {
+    background-color: #d4edda; /* 緑系の背景色 */
+    border: 1px solid #28a745; /* 緑系のボーダー */
+    color: #155724; /* 緑系の文字色 */
+}
+
+/* ログインページ間のリンク */
+.user-login-link, .admin-login-link {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: -60px; /* ログインフォームとの間隔を調整 */
+    font-size: 14px;
+}
+
+.user-login-link a, .admin-login-link a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.user-login-link a:hover, .admin-login-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+
+/* ========================================================== */
+/* ダッシュボード (dashboard.php) 専用のスタイル調整 */
+/* ========================================================== */
+
+/* ヒーローセクション (ページの顔となる部分) */
+.hero-section {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: #dbe9f4; /* 落ち着いた青系 */
+    color: #2c3e50;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #2c3e50;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #34495e;
+}
+
+.hero-section .action-button {
+    font-size: 1.1em;
+    padding: 12px 25px;
+    border-radius: 8px;
+}
+
+/* 採用情報セクション */
+.careers-section {
+    margin-bottom: 50px;
+}
+
+.careers-section h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.careers-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #f39c12; /* アクセントカラー */
+    border-radius: 2px;
+}
+
+.job-listing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 20px; /* 左右のパディング */
+}
+
+.job-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* flexboxで要素を配置 */
+    flex-direction: column; /* 縦方向に並べる */
+    justify-content: space-between; /* コンテンツとボタンを両端に配置 */
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h3 {
+    color: #34495e;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #a4c6e0;
+    padding-bottom: 10px;
+}
+
+.job-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 20px;
+    flex-grow: 1; /* 内容が長い場合でもボタンが下に揃うように */
+}
+
+.job-card .button-group {
+    text-align: right; /* ボタンを右寄せ */
+    margin-top: auto; /* コンテンツが短い場合でもボタンを一番下に配置 */
+}
+
+.job-card .action-button {
+    background-color: #5a80a2; /* 青系ボタン */
+    color: white !important;
+    padding: 8px 18px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+.job-card .action-button:hover {
+    background-color: #4a6d8f;
+    transform: translateY(-1px);
+}
+
+/* 会社文化セクション */
+.culture-section {
+    text-align: center;
+    background-color: #f0f8ff; /* 薄い水色 */
+    padding: 60px 20px;
+    border-radius: 8px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.culture-section h2 {
+    font-size: 36px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.culture-section .quote {
+    font-style: italic;
+    font-size: 1.3em;
+    color: #555;
+    margin-bottom: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+}
+
+.culture-section .author {
+    font-weight: bold;
+    color: #34495e;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.culture-section .action-button {
+    font-size: 1.1em;
+    padding: 12px 25px;
+    border-radius: 8px;
+    background-color: #555; /* ダークグレー */
+}
+
+.culture-section .action-button:hover {
+    background-color: #333;
+}
+
+/* CTA (Call to Action) セクション */
+.cta-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #2c3e50; /* ヘッダーと同じダークネイビー */
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-section h2 {
+    font-size: 38px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.cta-section p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.cta-section .action-button {
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border-radius: 8px;
+    background-color: #f39c12; /* アクセントカラー */
+}
+
+.cta-section .action-button:hover {
+    background-color: #e67e22;
+}
+
+
+/* ========================================================== */
 /* レスポンシブ対応 */
+/* ========================================================== */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -292,8 +827,86 @@ body {
         margin-top: 10px;
     }
 
-    /* ★追加・修正★ フォームラベルの改行に関するレスポンシブ対応 */
+    /* フォームラベルの改行に関するレスポンシブ対応 */
     .contact-form label {
         white-space: normal; /* モバイルでは必要に応じて折り返す */
+    }
+
+    /* user_management.php および user_edit.php のレスポンシブ対応 */
+    .search-controls {
+        flex-direction: column; /* 縦並びにする */
+        align-items: stretch; /* 幅いっぱいに広げる */
+    }
+
+    .search-form-wrapper form {
+        flex-direction: column; /* 検索フォーム内の要素も縦並び */
+        align-items: stretch;
+    }
+
+    .search-form-wrapper input[type="text"],
+    .search-form-wrapper button,
+    .action-button.clear-search-button {
+        width: 100%; /* 幅を100%にする */
+        max-width: none; /* 最大幅の制限を解除 */
+        margin-bottom: 10px; /* 各要素の下に余白 */
+    }
+
+    .add-user-button-container {
+        width: 100%; /* ボタンコンテナも幅いっぱい */
+        text-align: center; /* モバイルで中央揃えに */
+        margin-top: 10px; /* 上に少し余白 */
+    }
+
+    .edit-form-container {
+        padding: 20px; /* モバイルでのパディング調整 */
+    }
+
+    .edit-form-container .form-actions {
+        flex-direction: column; /* ボタンを縦並びに */
+        gap: 10px;
+    }
+
+    .edit-form-container .form-actions button,
+    .edit-form-container .form-actions a {
+        width: 100%; /* 幅いっぱい */
+    }
+
+    /* login.php & admin_login.php のレスポンシブ対応 */
+    .login-container {
+        width: 90%; /* 幅を調整 */
+        margin: 40px auto; /* 上下のマージンを調整 */
+        padding: 30px;
+    }
+
+    .login-container h2 {
+        font-size: 28px;
+    }
+
+    .user-login-link, .admin-login-link {
+        margin-bottom: -40px; /* 間隔を調整 */
+    }
+
+    /* ダッシュボードのレスポンシブ調整 */
+    .hero-section h1 {
+        font-size: 36px;
+    }
+    .hero-section p {
+        font-size: 1em;
+    }
+    .careers-section h2, .culture-section h2, .cta-section h2 {
+        font-size: 28px;
+    }
+    .job-listing {
+        grid-template-columns: 1fr; /* 1列にする */
+    }
+}
+
+@media (max-width: 600px) {
+    .login-container {
+        width: 95%;
+        padding: 20px;
+    }
+    .login-container h2 {
+        font-size: 24px;
     }
 }

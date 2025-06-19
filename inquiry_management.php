@@ -23,8 +23,39 @@ if ($conn->connect_error) {
     die("データベース接続エラー: " . $conn->connect_error);
 }
 
+// ===============================================
+// ★ここから追加・修正するPHPコード★
+// ===============================================
+
+// お問い合わせ種別の選択肢を定義 (contact.php と同期)
+$inquiry_types = [
+    '' => '全てのお問い合わせ種別', // 検索用に追加
+    '採用に関するお問い合わせ' => '採用に関するお問い合わせ',
+    'その他のお問い合わせ' => 'その他のお問い合わせ',
+    // 採用職種も検索対象にする場合
+    'ソフトウェアエンジニア' => 'ソフトウェアエンジニア',
+    'データサイエンティスト' => 'データサイエンティスト',
+    'プロジェクトマネージャー' => 'プロジェクトマネージャー',
+    'UI/UXデザイナー' => 'UI/UXデザイナー',
+    'インフラエンジニア' => 'インフラエンジニア',
+    '品質保証エンジニア' => '品質保証エンジニア'
+];
+
+// ステータスの選択肢を定義
+$status_options = [
+    '' => '全てのステータス',
+    '0' => '未対応',
+    '1' => '一次回答済',
+    '2' => '完了',
+    '3' => 'クローズ'
+];
+
+
 // 検索条件の取得
 $search_keyword = $_GET['search_keyword'] ?? '';
+$search_inquiry_kind = $_GET['search_inquiry_kind'] ?? ''; // ★新規: お問い合わせ種別検索パラメータ
+$search_status = $_GET['search_status'] ?? ''; // ★新規: ステータス検索パラメータ
+
 // SQLインジェクション対策としてエスケープし、部分一致検索用にワイルドカードを追加
 $search_keyword_escaped = '%' . $conn->real_escape_string($search_keyword) . '%';
 
@@ -34,7 +65,7 @@ $sort_column = $_GET['sort_column'] ?? 'created_dt';
 $sort_order = $_GET['sort_order'] ?? 'DESC';
 
 // ソート可能なカラムをホワイトリスト化 (SQLカラム名)
-$allowed_sort_columns = ['name', 'mail_address', 'inquiry_kind', 'subject', 'created_dt', 'status']; // inquiry_details はソート対象から除外
+$allowed_sort_columns = ['name', 'mail_address', 'inquiry_kind', 'subject', 'created_dt', 'status'];
 if (!in_array($sort_column, $allowed_sort_columns)) {
     $sort_column = 'created_dt'; // 不正な場合はデフォルトに戻す
 }
@@ -44,7 +75,6 @@ if (!in_array(strtoupper($sort_order), ['ASC', 'DESC'])) {
 }
 
 // SQLクエリの構築
-// ★ SELECT 文に key_id カラムを追加しました ★
 $sql = "SELECT key_id, name, mail_address, inquiry_kind, subject, inquiry_details, created_dt, status FROM inquiry_table";
 $where_clauses = [];
 
@@ -56,8 +86,22 @@ if (!empty($search_keyword)) {
                          inquiry_details LIKE '$search_keyword_escaped')";
 }
 
+// ★修正: お問い合わせ種別によるフィルタリングを修正
+if (!empty($search_inquiry_kind)) {
+    $search_inquiry_kind_escaped = $conn->real_escape_string($search_inquiry_kind);
+    $where_clauses[] = "inquiry_kind = '$search_inquiry_kind_escaped'";
+}
+
+// ★追加: ステータスによるフィルタリング
+// search_statusが空文字列でない、かつ '0', '1', '2', '3' のいずれかである場合にフィルタリングを適用
+if ($search_status !== '' && in_array($search_status, array_keys($status_options))) {
+    $search_status_escaped = $conn->real_escape_string($search_status);
+    $where_clauses[] = "status = '$search_status_escaped'";
+}
+
+
 if (!empty($where_clauses)) {
-    $sql .= " WHERE " . implode(" AND ", $where_clauses);
+    $sql .= " WHERE " . implode(" AND ", $where_clauses); // AND で結合することで、両方の条件を満たすものを検索
 }
 
 // ソート条件を追加 (物理カラム名)
@@ -104,7 +148,7 @@ function getStatusText($status_code) {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         }
 
-        .inquiry-management-section h2 {
+        .inquiry-management-section h1 { /* page-title から h1 に変更 */
             text-align: center;
             color: #2c3e50;
             margin-bottom: 30px;
@@ -113,6 +157,7 @@ function getStatusText($status_code) {
         /* 検索フォームのスタイル */
         .search-form {
             display: flex;
+            flex-wrap: wrap; /* 要素が収まらない場合に折り返す */
             gap: 10px;
             margin-bottom: 30px;
             padding: 15px;
@@ -122,12 +167,21 @@ function getStatusText($status_code) {
             align-items: center;
         }
 
+        .search-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap; /* ラベルと入力フィールドも折り返す */
+        }
+
         .search-form label {
             font-weight: bold;
             color: #333;
+            white-space: nowrap; /* ラベルが途中で改行されないように */
         }
 
-        .search-form input[type="text"] {
+        .search-form input[type="text"],
+        .search-form select {
             flex-grow: 1;
             padding: 8px 12px;
             border: 1px solid #ccc;
@@ -136,7 +190,7 @@ function getStatusText($status_code) {
             max-width: 400px; /* 検索フィールドの最大幅 */
         }
 
-        .search-form button {
+        .search-form button[type="submit"] { /* type="submit" を明示 */
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
@@ -147,9 +201,28 @@ function getStatusText($status_code) {
             transition: background-color 0.3s ease;
         }
 
-        .search-form button:hover {
+        .search-form button[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        .search-form .action-button {
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block; /* ボタンのように見せる */
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-form .action-button:hover {
+            background-color: #5a6268;
+        }
+
 
         /* お問い合わせテーブルのスタイル */
         .inquiry-table {
@@ -231,7 +304,8 @@ function getStatusText($status_code) {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .search-form input[type="text"] {
+            .search-form input[type="text"],
+            .search-form select {
                 max-width: 100%;
             }
              .inquiry-table th, .inquiry-table td {
@@ -344,7 +418,7 @@ function getStatusText($status_code) {
                 <ul>
                     <li><a href="admin_dashboard.php">ダッシュボード</a></li>
                     <li><a href="user_management.php">ユーザー管理</a></li>
-                    <li><a href="inquiry_management.php">お問い合わせ</a></li>
+                    <li><a href="inquiry_management.php">お問い合わせ管理</a></li>
                     <li><a href="logout.php" class="action-button">ログアウト</a></li>
                 </ul>
             </nav>
@@ -356,24 +430,54 @@ function getStatusText($status_code) {
         </div>
     </header>
 
-    <main class="main-content">
+<main class="main-content">
         <h1 class="page-title">お問い合わせ内容確認</h1>
 
         <section class="inquiry-management-section">
-            <div class="search-form">
-                <form action="inquiry_management.php" method="get">
+            <form action="inquiry_management.php" method="get" class="search-form">
+                <div class="search-group">
                     <label for="search_keyword">キーワード検索:</label>
                     <input type="text" id="search_keyword" name="search_keyword"
                            value="<?php echo htmlspecialchars($search_keyword); ?>"
                            placeholder="名前、メール、件名、内容">
-                    <input type="hidden" name="sort_column" value="<?php echo htmlspecialchars($sort_column); ?>">
-                    <input type="hidden" name="sort_order" value="<?php echo htmlspecialchars($sort_order); ?>">
-                    <button type="submit">検索</button>
-                    <?php if (!empty($search_keyword)): ?>
-                        <a href="inquiry_management.php" class="action-button" style="background-color: #6c757d; margin-left: 10px;">検索クリア</a>
-                    <?php endif; ?>
-                </form>
-            </div>
+                </div>
+                <div class="search-group">
+                    <label for="search_inquiry_kind">お問い合わせ種別:</label>
+                    <select id="search_inquiry_kind" name="search_inquiry_kind">
+                        <?php foreach ($inquiry_types as $value => $label): ?>
+                            <option value="<?php echo htmlspecialchars($value); ?>"
+                                <?php echo ($search_inquiry_kind === $value) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($label); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="search_status">ステータス:</label>
+                    <select id="search_status" name="search_status">
+                        <?php foreach ($status_options as $value => $label): ?>
+                            <option value="<?php echo htmlspecialchars($value); ?>"
+                                <?php echo (string)$search_status === (string)$value ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($label); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <input type="hidden" name="sort_column" value="<?php echo htmlspecialchars($sort_column); ?>">
+                <input type="hidden" name="sort_order" value="<?php echo htmlspecialchars($sort_order); ?>">
+                <button type="submit">検索</button>
+                <?php if (!empty($search_keyword) || !empty($search_inquiry_kind) || $search_status !== ''): ?>
+                    <a href="inquiry_management.php" class="action-button" style="background-color: #6c757d; margin-left: 10px;">検索クリア</a>
+                <?php endif; ?>
+            </form>
+
+            <?php if (!empty($search_inquiry_kind) || $search_status !== ''): ?>
+                <div style="padding: 10px; margin-bottom: 10px; background-color: #f0f8ff; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9em;">
+                    <strong>検索中のお問い合わせ種別:</strong> <?php echo htmlspecialchars($search_inquiry_kind); ?><br>
+                    <strong>検索中のステータス:</strong> <?php echo htmlspecialchars($status_options[$search_status] ?? '全て'); ?><br>
+                    <strong>該当件数:</strong> <?php echo count($inquiries); ?>件<br>
+                </div>
+            <?php endif; ?>
 
             <table class="inquiry-table">
                 <thead>
@@ -465,7 +569,8 @@ function getStatusText($status_code) {
                     <option value="3">クローズ</option>
                 </select>
                 <button onclick="updateInquiryStatus()">ステータス更新</button>
-                <input type="hidden" id="currentInquiryKeyId"> </div>
+                <input type="hidden" id="currentInquiryKeyId">
+            </div>
         </div>
     </div>
 
@@ -490,6 +595,23 @@ function getStatusText($status_code) {
             } else {
                  currentUrl.searchParams.delete('search_keyword');
             }
+
+            // ★修正: お問い合わせ種別の検索条件を保持
+            const searchInquiryKind = currentUrl.searchParams.get('search_inquiry_kind');
+            if (searchInquiryKind) {
+                currentUrl.searchParams.set('search_inquiry_kind', searchInquiryKind);
+            } else {
+                currentUrl.searchParams.delete('search_inquiry_kind');
+            }
+
+            // ★追加: ステータスの検索条件を保持
+            const searchStatus = currentUrl.searchParams.get('search_status');
+            if (searchStatus !== null) { // nullチェックで空文字列も考慮
+                currentUrl.searchParams.set('search_status', searchStatus);
+            } else {
+                currentUrl.searchParams.delete('search_status');
+            }
+
 
             window.location.href = currentUrl.toString();
         }
@@ -549,7 +671,7 @@ function getStatusText($status_code) {
             }
         }
 
-        // ステータス更新関数
+       // ステータス更新関数
         function updateInquiryStatus() {
             // ★ currentInquiryId を currentInquiryKeyId に変更 ★
             const keyId = document.getElementById('currentInquiryKeyId').value;

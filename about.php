@@ -40,8 +40,9 @@ $username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名が
 
         <div class="section-block">
             <h3>ご挨拶</h3>
-            <p>当社は20XX年の創業以来、「テクノロジーで社会を豊かに」をミッションに掲げ、お客様のビジネス課題を解決する革新的なソリューションを提供してまいりました。変化の激しい現代において、私たちは常に最先端の技術を探求し、お客様に真の価値を創造し続けることをお約束します。ゲッッ</p>
-            <p>代表取締役社長：ダンディ坂野</p>
+            <p>当社は20XX年の創業以来、「テクノロジーで社会を豊かに」ってミッションを掲げ、
+お客様のビジネスの、そこのキミの悩みを解決する革新的なソリューションを提供してきました。変化の激しい現代に私たちは常に最先端の技術を貪欲にお客様に真の価値を創造し続けることをお約束します。</p>
+            <p>代表取締役社長：永野</p>
         </div>
 
         <div class="section-block">
@@ -72,9 +73,9 @@ $username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名が
         <div class="section-block">
             <h3>会社情報</h3>
             <p><strong>会社名:</strong> 株式会社 ラッセン</p>
-            <p><strong>設立:</strong> 20XX年XX月XX日</p>
-            <p><strong>所在地:</strong> 〒XXX-XXXX 東京都〇〇区〇〇X丁目X-X</p>
-            <p><strong>資本金:</strong> XXXX万円</p>
+            <p><strong>設立:</strong> 2025年7月7日</p>
+            <p><strong>所在地:</strong> 〒150-0043 東京都渋谷区道玄坂1丁目2-3</p>
+            <p><strong>資本金:</strong>  777万円</p>
             <p><strong>事業内容:</strong> ゴッホ制作、ラッセン開発、はぁあい支援</p>
         </div>
     </main>

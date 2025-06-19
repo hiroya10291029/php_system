@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($message_status, '失敗し�
                 </div>
                 <div class="form-group">
                     <label for="message">お問い合わせ内容 <span class="required">*</span></label>
-                    <textarea id="message" name="message" rows="10" required maxlength="400" placeholder="400文字以内での記入をお願いいたします。採用応募に関しましては、空白で構いません。こちらからメールにて折り返しご連絡差し上げます。"><?php echo htmlspecialchars($message_value); ?></textarea>
+                    <textarea id="message" name="message" rows="10" required maxlength="400" placeholder="400文字以内での記入をお願いいたします。採用応募に関しましては、空白で構いません。弊社よりメールにて折り返しご連絡差し上げます。"><?php echo htmlspecialchars($message_value); ?></textarea>
                 </div>
                 <button type="submit">送信</button>
             </form>

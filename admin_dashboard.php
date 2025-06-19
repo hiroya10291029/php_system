@@ -120,7 +120,8 @@ ini_set('display_errors', 1);
             <nav class="main-nav">
                 <ul>
                     <li><a href="admin_dashboard.php">ダッシュボード</a></li>
-                    <li><a href="#">設定</a></li>
+                    <li><a href="user_management.php">ユーザー管理</a></li>
+                    <li><a href="inquiry_management.php">お問い合わせ管理</a></li>
                     <li><a href="logout.php" class="action-button">ログアウト</a></li>
                 </ul>
             </nav>
@@ -150,8 +151,8 @@ ini_set('display_errors', 1);
 
             <div class="dashboard-card">
                 <h3>システム設定</h3>
-                <p>システム全体の動作に関する設定（例えば、メール通知設定やサイトの基本情報など）を行います。</p>
-                <a href="#" class="action-button" style="background-color: #6c757d;">設定画面へ (未実装)</a>
+                <p>どんな画面を実装しようか検討中です。どんな画面を実装しようか検討中です。</p>
+                <a href="#" class="action-button" style="background-color: #6c757d;">????</a>
             </div>
         </div>
     </main>

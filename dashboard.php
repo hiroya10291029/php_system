@@ -278,7 +278,7 @@ ini_set('display_errors', 1);
         <section class="hero-section">
             <h1>あなたのキャリアを、社会の未来に。</h1>
             <p>革新的な技術で社会課題を解決する仲間を募集しています。</p>
-            <a href="#job-listings" class="action-button0">募集職種を見る</a>
+            <a href="#job-listings" class="action-button">募集職種を見る</a>
         </section>
 
         <section id="job-listings" class="job-listings">
