@@ -12,19 +12,10 @@ $message_status = ''; // 処理結果メッセージ用
 $input_username = '';
 $input_password = ''; // 新規登録なので初期は空
 
-// データベース接続情報
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = ''; // ★重要★ あなたのXAMPPのMySQLパスワードが空欄でなければここに設定
-$db_name = 'inquiry'; // ★重要★ データベース名が 'inquiry' であることを確認
+// データベース接続ファイルを読み込む
+require_once 'db_connect.php'; // ここを追記
 
-// データベースに接続
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-// 接続エラーの確認
-if ($conn->connect_error) {
-    die("データベース接続エラー: " . $conn->connect_error);
-}
+$error_message = '';
 
 // --- 新規登録処理 ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

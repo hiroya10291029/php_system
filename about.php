@@ -83,5 +83,8 @@ $username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名が
     <footer class="footer">
         <p>&copy; 2023 株式会社テストシステム. All rights reserved.</p>
     </footer>
+    <a href="salary_simulator.php" class="salary-simulator-button">
+        年収シミュレーター
+    </a>
 </body>
 </html>

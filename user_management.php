@@ -9,19 +9,10 @@ if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !
 
 $username_display = htmlspecialchars($_SESSION['username'] ?? '管理者');
 
-// データベース接続情報
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = ''; // ★重要★ あなたのXAMPPのMySQLパスワードが空欄でなければここに設定
-$db_name = 'inquiry'; // ★重要★ データベース名が 'inquiry' であることを確認
+// データベース接続ファイルを読み込む
+require_once 'db_connect.php'; // ここを追記
 
-// データベースに接続
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-// 接続エラーの確認
-if ($conn->connect_error) {
-    die("データベース接続エラー: " . $conn->connect_error);
-}
+$error_message = '';
 
 // 検索条件の取得
 $search_username = $_GET['search_username'] ?? '';

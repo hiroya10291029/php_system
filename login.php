@@ -18,17 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($username) || empty($password)) {
         $error_message = 'ユーザー名とパスワードを入力してください。';
     } else {
-        // --- データベース接続情報 ---
-        $db_host = 'localhost';
-        $db_user = 'root';
-        // ★重要★ あなたのXAMPPのMySQLパスワードが空欄でなければここに設定
-        // デフォルトではXAMPPのrootユーザーのパスワードは空欄です。
-        $db_pass = '';
-        // ★ここを「inquiry」に設定
-        $db_name = 'inquiry';
+        // データベース接続ファイルを読み込む
+        require_once 'db_connect.php'; // ここを追記
 
-        // データベースに接続
-        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+        $error_message = '';
 
         // 接続エラーの確認
         if ($conn->connect_error) {

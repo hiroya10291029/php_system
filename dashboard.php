@@ -33,7 +33,7 @@ ini_set('display_errors', 1);
             margin-bottom: 50px;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  　　　　　box-sizing: border-box;
+            box-sizing: border-box;
         }
 
         .hero-section h1 {
@@ -191,6 +191,7 @@ ini_set('display_errors', 1);
             color: white;
             border-radius: 8px;
             margin-top: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .cta-section h2 {
@@ -249,6 +250,16 @@ ini_set('display_errors', 1);
 
             .culture-section .quote {
                 font-size: 18px;
+            }
+        }
+        /* モバイル対応：ボタンのサイズを調整 */
+        @media (max-width: 600px) {
+            .salary-simulator-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 14px;
+                min-width: 120px;
             }
         }
     </style>
@@ -346,5 +357,10 @@ ini_set('display_errors', 1);
     <footer class="footer">
         <p>&copy; 2023 株式会社テストシステム. All rights reserved.</p>
     </footer>
+
+    <a href="salary_simulator.php" class="salary-simulator-button">
+        年収シミュレーター
+    </a>
+
 </body>
 </html>

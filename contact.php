@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !== true) {
+    header('Location: login.php');
+    exit();
+}
 // フォーム送信後の処理
 $message_status = ''; // メッセージ表示用の変数
 
@@ -15,14 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // --- データベース挿入処理 ---
 
-    // データベース接続情報
-    $db_host = 'localhost';
-    $db_user = 'root';
-    $db_pass = ''; // ★重要★ あなたのXAMPPのMySQLパスワードが空欄でなければここに設定
-    $db_name = 'inquiry'; // ★重要★ データベース名が 'inquiry' であることを確認
+    // データベース接続ファイルを読み込む
+    require_once 'db_connect.php'; // ここを追記
 
-    // データベースに接続
-    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    $error_message = '';
 
     // 接続エラーの確認
     if ($conn->connect_error) {
@@ -222,5 +221,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($message_status, '失敗し�
             updateSubject();
         });
     </script>
+    <a href="salary_simulator.php" class="salary-simulator-button">
+        年収シミュレーター
+    </a>
 </body>
 </html>

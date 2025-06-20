@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !== true) {
+    header('Location: login.php');
+    exit();
+}
 // 認証されていない場合は管理者ログインページへリダイレクト
 if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !== true) {
     // AjaxリクエストなのでJSONでエラーを返す
@@ -8,20 +11,10 @@ if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !
     echo json_encode(['success' => false, 'message' => 'Unauthorized']);
     exit();
 }
+// データベース接続ファイルを読み込む
+require_once 'db_connect.php'; // ここを追記
 
-// データベース接続情報
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = ''; // ★重要★ あなたのXAMPPのMySQLパスワードが空欄でなければここに設定
-$db_name = 'inquiry'; // ★重要★ データベース名が 'inquiry' であることを確認
-
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-if ($conn->connect_error) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'データベース接続エラー: ' . $conn->connect_error]);
-    exit();
-}
+$error_message = '';
 
 // レスポンスはJSON形式で返す
 header('Content-Type: application/json');

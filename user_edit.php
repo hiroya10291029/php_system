@@ -10,19 +10,10 @@ if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !
 $username_display = htmlspecialchars($_SESSION['username'] ?? '管理者');
 $message_status = ''; // 処理結果メッセージ用
 
-// データベース接続情報
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = ''; // ★重要★ あなたのXAMPPのMySQLパスワードが空欄でなければここに設定
-$db_name = 'inquiry'; // ★重要★ データベース名が 'inquiry' であることを確認
+// データベース接続ファイルを読み込む
+require_once 'db_connect.php'; // ここを追記
 
-// データベースに接続
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-// 接続エラーの確認
-if ($conn->connect_error) {
-    die("データベース接続エラー: " . $conn->connect_error);
-}
+$error_message = '';
 
 $user_data = null; // 編集対象のユーザーデータを格納する変数
 $target_username = $_GET['username'] ?? ''; // GETパラメータからユーザー名を取得（初回表示時や更新後の再表示用）
@@ -303,7 +294,6 @@ $conn->close();
 
                     <label for="pass_word">パスワード:</label>
                     <input type="password" id="pass_word" name="pass_word" value="<?php echo htmlspecialchars($user_data['pass_word']); ?>" required>
-                    <small>※セキュリティのため、パスワードはハッシュ化して保存することを強く推奨します。</small>
 
                     <label>作成日時:</label>
                     <input type="text" value="<?php echo htmlspecialchars($user_data['create_dt']); ?>" readonly>

@@ -793,6 +793,30 @@ body {
 .cta-section .action-button:hover {
     background-color: #e67e22;
 }
+        /* 年収シミュレーターボタンのスタイル */
+        .salary-simulator-button {
+            position: fixed; /* 画面に固定 */
+            bottom: 30px;    /* 画面下からの距離 */
+            right: 30px;     /* 画面右からの距離 */
+            background-color: #007bff; /* ボタンの背景色 */
+            color: white;            /* 文字色 */
+            padding: 15px 25px;      /* 内側の余白 */
+            border-radius: 50px;     /* 丸みを持たせる（円形に近づける） */
+            text-decoration: none;   /* 下線をなくす */
+            font-weight: bold;       /* 太字 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影 */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* ホバーアニメーション */
+            z-index: 1000;           /* 他の要素の上に表示 */
+            display: flex;           /* Flexboxを使ってテキストを中央に */
+            align-items: center;     /* 垂直方向中央揃え */
+            justify-content: center; /* 水平方向中央揃え */
+            min-width: 150px;        /* 最小幅を設定してボタンの大きさを確保 */
+            text-align: center;      /* テキストを中央揃え */
+        }
+        .salary-simulator-button:hover {
+            background-color: #0056b3; /* ホバー時の背景色 */
+            transform: translateY(-2px); /* 少し浮き上がる効果 */
+        }
 
 
 /* ========================================================== */
