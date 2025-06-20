@@ -68,8 +68,9 @@ $conn->close();
     <style>
         /* user_management.php 専用のスタイル調整 */
         .main-content {
-            padding: 40px 20px;
-            max-width: 1000px; /* 画面幅に合わせて調整 */
+            /*padding: 40px 20px;*/
+            padding: 80px;            
+            max-width: 1200px; /* 画面幅に合わせて調整 */
             margin: 20px auto;
             background-color: #ffffff;
             border-radius: 8px;

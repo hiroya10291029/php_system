@@ -80,7 +80,7 @@ $conn->close();
     <style>
         /* user_edit.php から引き継ぐか、適宜調整 */
         .edit-form-container {
-            max-width: 600px;
+            max-width: 1200px;
             margin: 30px auto;
             padding: 30px;
             background-color: #fff;
@@ -185,8 +185,8 @@ $conn->close();
             <nav class="main-nav">
                 <ul>
                     <li><a href="admin_dashboard.php">ダッシュボード</a></li>
+                    <li><a href="user_management.php">ユーザー管理</a></li>                    
                     <li><a href="inquiry_management.php">お問い合わせ管理</a></li>
-                    <li><a href="user_management.php">ユーザー管理</a></li>
                     <li><a href="logout.php" class="action-button">ログアウト</a></li>
                 </ul>
             </nav>

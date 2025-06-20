@@ -10,24 +10,34 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f8f8f8; /* 全体の背景色を少し明るく */
+
+    /* ここから追加・変更：フッターを最下部に固定するためのFlexbox設定 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 画面全体の高さを確保 */
+    /* ここまで追加・変更 */
 }
 
 /* ヘッダー */
 .header {
     background-color: #2c3e50; /* ダークネイビー */
     color: #ffffff;
-    padding: 15px 0;
+    padding: 20px 0; /* 上下20px、左右0のパディング */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* 画面に固定 */
+    top: 0;           /* 画面の上端に配置 */
+    width: 100%;      /* 横幅いっぱいに広げる */
+    z-index: 1000;    /* 他のコンテンツの上に表示されるようにする */
 }
 
 .header-content {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between; /* 要素間のスペースを均等に分配 */
     align-items: center; /* これが垂直方向の中央揃えの肝 */
     padding: 0 20px;
-    flex-wrap: wrap; /* 要素が収まらない場合に折り返す */
+     flex-wrap: wrap; /*要素が収まらない場合に折り返す */
 }
 
 .logo {
@@ -102,13 +112,22 @@ body {
     font-weight: 500;
     margin-left: 20px;
     white-space: nowrap;
+    /* ここは以前の画像で問題なさそうなので、一旦追加マージンをコメントアウト */
+    /* margin-top: 15px; */
 }
 
 /* メインコンテンツの共通スタイル */
 .main-content {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
+    /* ここから修正：padding-topを調整 (ヘッダーの高さ + ゆとり) */
+    padding-top: 100px; /* ヘッダーの高さ (約60px) + 40px程度のゆとり */
+    margin-top: 0;
+    flex-grow: 1; /* コンテンツが少ない場合にフッターを下に押し出す */
+    max-width: 1200px; /* 最大幅 */
+    margin-left: auto; /* 左右中央寄せ */
+    margin-right: auto; /* 左右中央寄せ */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
@@ -119,6 +138,9 @@ body {
     font-size: 32px;
     color: #2c3e50;
     text-align: center;
+    /* ここから修正：page-titleのmargin-topはadmin-dashboard用だったため、一旦汎用的なmain-contentに任せる */
+    margin-top: 0; /* main-contentのpadding-topで調整するためリセット */
+    /* ここまで修正 */
     margin-bottom: 40px;
     border-bottom: 2px solid #5a80a2; /* 暗めの青系に */
     padding-bottom: 15px;
@@ -171,14 +193,14 @@ body {
     margin-bottom: 8px;
     font-weight: bold;
     color: #333;
-    white-space: nowrap; /* ラベルのテキストが改行されないように */
+    /* white-space: nowrap; */ /* モバイル対応でコメントアウトしていた部分 */
 }
 
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form select,
 .contact-form textarea {
-    width: calc(100% - 20px); /* 左右のpaddingを考慮して20px引く */
+    width: 1200px; /*calc(100% - 20px); /* 左右のpaddingを考慮して20px引く */
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -233,7 +255,7 @@ body {
     color: #ecf0f1;
     text-align: center;
     padding: 25px 0;
-    margin-top: 50px; /* 他のページとの統一のため調整 */
+    flex-shrink: 0; /* フッターが縮まないようにする */
     font-size: 14px;
 }
 
@@ -257,12 +279,56 @@ body {
 /* 管理系ページのメインコンテンツの調整 */
 /* 共通の.main-contentスタイルを適用しつつ、管理画面特有の最大幅を設定 */
 .admin-main-content {
-    max-width: 1000px; /* user_management.phpでの設定を反映 */
-    margin: 30px auto;
-    padding: 20px;
+    /* ここから修正：padding-topをmain-contentと同じ値に合わせる（100px） */
+    padding-top: 100px;
+    margin-top: 0;
+    flex-grow: 1; /* コンテンツが少ない場合にフッターを下に押し出す */
+    /* ここまで修正 */
+    max-width: 1200px; /* user_management.phpでの設定を反映 */
+    margin-left: auto; /* 左右中央寄せを維持 */
+    margin-right: auto; /* 左右中央寄せを維持 */
+    padding-left: 20px; /* 元のpaddingを維持 */
+    padding-right: 20px; /* 元のpaddingを維持 */
+    padding-bottom: 20px; /* 元のpaddingを維持 */
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* 「ようこそ」メッセージのスタイル（画像で表示されているメッセージを想定） */
+/* このクラスがHTMLに適用されていることを確認してください */
+.welcome-message {
+    padding-left: 20px; /* 左右のパディングと合わせる */
+    margin-top: 15px; /* 上部マージンを追加 */
+    margin-bottom: 10px; /* 下部マージンも調整 */
+    color: #34495e; /* 色を少し濃くして見やすく */
+    font-size: 1.1em;
+}
+
+/* ここから追加：管理者ダッシュボードのタイトル調整 */
+/* 画像から、このタイトルが page-title とは別の要素である可能性も考慮 */
+/* もし、HTMLで「管理者ダッシュボード」のテキストに特定のクラスがあれば、それを優先してください。 */
+/* 例えば、<h2 class="admin-dashboard-heading">管理者ダッシュボード</h2> の場合 */
+.admin-dashboard-heading {
+    margin-top: 20px; /* ヘッダーから十分に離れるようにマージン追加 */
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #2c3e50;
+    text-align: center;
+    border-bottom: 2px solid #5a80a2;
+    padding-bottom: 15px;
+}
+/* もし「管理者ダッシュボード」が特定のクラスを持たず、h1, h2, h3などのタグ直打ちであれば */
+/* HTMLでそのタイトルがどのタグを使っているか確認し、セレクタを調整してください。 */
+/* 例えば、admin-main-content直下のh2タグであれば */
+.admin-main-content > h2:nth-of-type(1) { /* admin-main-content内の最初のh2要素を想定 */
+    margin-top: 20px; /* 上部マージンを追加 */
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #2c3e50;
+    text-align: center;
+    border-bottom: 2px solid #5a80a2;
+    padding-bottom: 15px;
 }
 
 
@@ -391,13 +457,6 @@ body {
     background-color: #e0f0ff;
 }
 
-.user-table th .sort-indicator {
-    position: absolute;
-    right: 10px;
-    font-size: 0.8em;
-    color: #666;
-}
-
 .user-table tr {
     cursor: pointer; /* 行がクリック可能であることを示す */
 }
@@ -414,7 +473,7 @@ body {
 /* user_edit.php 専用のスタイル調整 */
 /* ========================================================== */
 .edit-form-container {
-    max-width: 600px;
+    max-width:1200px;
     margin: 30px auto;
     padding: 30px;
     background-color: #ffffff;
@@ -506,8 +565,13 @@ body {
 /* ========================================================== */
 .login-container {
     max-width: 400px;
-    margin: 80px auto; /* 上下のマージンを大きくして中央に */
-    padding: 40px;
+    /* ここから追加・変更 */
+    margin-top: 100px; /* ヘッダー固定により、上からの位置を調整 */
+    margin-bottom: 80px; /* 他のページとの統一のため、下部マージンも調整 */
+    /* ここまで追加・変更 */
+    margin-left: auto; /* 左右中央寄せ */
+    margin-right: auto; /* 左右中央寄せ */
+    padding: 25px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -576,8 +640,10 @@ body {
 /* ログインページ間のリンク */
 .user-login-link, .admin-login-link {
     text-align: center;
-    margin-top: 20px;
+    /* ここから変更 */
+    margin-top: 100px; /* ヘッダー固定に伴い上からの位置を調整 */
     margin-bottom: -60px; /* ログインフォームとの間隔を調整 */
+    /* ここまで変更 */
     font-size: 14px;
 }
 
@@ -619,7 +685,7 @@ body {
     font-size: 1.2em;
     line-height: 1.6;
     margin-bottom: 30px;
-    max-width: 800px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     color: #34495e;
@@ -796,22 +862,22 @@ body {
         /* 年収シミュレーターボタンのスタイル */
         .salary-simulator-button {
             position: fixed; /* 画面に固定 */
-            bottom: 30px;    /* 画面下からの距離 */
+            bottom: 30px;   /* 画面下からの距離 */
             right: 30px;     /* 画面右からの距離 */
             background-color: #007bff; /* ボタンの背景色 */
-            color: white;            /* 文字色 */
-            padding: 15px 25px;      /* 内側の余白 */
-            border-radius: 50px;     /* 丸みを持たせる（円形に近づける） */
-            text-decoration: none;   /* 下線をなくす */
-            font-weight: bold;       /* 太字 */
+            color: white;              /* 文字色 */
+            padding: 15px 25px;        /* 内側の余白 */
+            border-radius: 50px;       /* 丸みを持たせる（円形に近づける） */
+            text-decoration: none;     /* 下線をなくす */
+            font-weight: bold;         /* 太字 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影 */
             transition: background-color 0.3s ease, transform 0.2s ease; /* ホバーアニメーション */
-            z-index: 1000;           /* 他の要素の上に表示 */
-            display: flex;           /* Flexboxを使ってテキストを中央に */
-            align-items: center;     /* 垂直方向中央揃え */
-            justify-content: center; /* 水平方向中央揃え */
-            min-width: 150px;        /* 最小幅を設定してボタンの大きさを確保 */
-            text-align: center;      /* テキストを中央揃え */
+            z-index: 1000;             /* 他の要素の上に表示 */
+            display: flex;             /* Flexboxを使ってテキストを中央に */
+            align-items: center;       /* 垂直方向中央揃え */
+            justify-content: center;   /* 水平方向中央揃え */
+            min-width: 150px;          /* 最小幅を設定してボタンの大きさを確保 */
+            text-align: center;        /* テキストを中央揃え */
         }
         .salary-simulator-button:hover {
             background-color: #0056b3; /* ホバー時の背景色 */

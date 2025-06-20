@@ -110,7 +110,7 @@ $conn->close();
     <style>
         /* user_edit.php 専用のスタイル調整 */
         .main-content {
-            padding: 40px 20px;
+            padding: 80px;
             max-width: 600px; /* フォームの幅を調整 */
             margin: 20px auto;
             background-color: #ffffff;

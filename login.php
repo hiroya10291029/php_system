@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .admin-login-link {
             position: absolute;
-            top: 20px;
+            top: -80px;
             right: 20px;
             font-size: 14px;
         }
@@ -100,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: all 0.3s ease;
         }
         .admin-login-link a:hover {
+　　　　　　top: 0;
             background-color: #007bff;
             color: white;
         }

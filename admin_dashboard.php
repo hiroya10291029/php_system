@@ -27,7 +27,7 @@ ini_set('display_errors', 1);
     <style>
         /* admin_dashboard.php 専用のスタイル調整 */
         .main-content {
-            padding: 40px 20px;
+            padding: 80px;
             max-width: 900px;
             margin: 20px auto;
             background-color: #ffffff;
@@ -140,13 +140,13 @@ ini_set('display_errors', 1);
             <div class="dashboard-card">
                 <h3>ユーザー管理</h3>
                 <p>登録されている一般ユーザーのアカウント情報を管理します。新規ユーザーの追加、既存ユーザーの編集、削除が行えます。</p>
-                <a href="user_management.php" class="action-button">ユーザー管理へ</a>
+                <a href="user_management.php" class="action-button">ユーザー管理</a>
             </div>
 
             <div class="dashboard-card">
                 <h3>お問い合わせ内容確認</h3>
                 <p>ユーザーからのお問い合わせ内容を一覧で確認し、対応状況を管理します。返信状況の更新や詳細情報の閲覧が可能です。</p>
-                <a href="inquiry_management.php" class="action-button">お問い合わせ確認へ</a>
+                <a href="inquiry_management.php" class="action-button">お問い合わせ確認</a>
             </div>
 
             <div class="dashboard-card">
