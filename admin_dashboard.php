@@ -119,9 +119,9 @@ ini_set('display_errors', 1);
             <a href="admin_dashboard.php" class="logo">株式会社テストシステム (管理者)</a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="admin_dashboard.php">ダッシュボード</a></li>
                     <li><a href="user_management.php">ユーザー管理</a></li>
                     <li><a href="inquiry_management.php">お問い合わせ管理</a></li>
+                    <li><a href="salary_simulator_management.php">年収シミュレーター管理</a></li>                    
                     <li><a href="logout.php" class="action-button">ログアウト</a></li>
                 </ul>
             </nav>
@@ -151,8 +151,8 @@ ini_set('display_errors', 1);
 
             <div class="dashboard-card">
                 <h3>システム設定</h3>
-                <p>どんな画面を実装しようか検討中です。どんな画面を実装しようか検討中です。</p>
-                <a href="#" class="action-button" style="background-color: #6c757d;">????</a>
+                <p>年収シミュレーター機能の設定値の変更・削除・編集をすることができます。</p>
+                <a href="salary_simulator_management.php" class="action-button">年収シミュレーター設定</a>
             </div>
         </div>
     </main>

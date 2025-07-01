@@ -210,9 +210,9 @@ $conn->close();
             <a href="admin_dashboard.php" class="logo">株式会社テストシステム (管理者)</a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="admin_dashboard.php">ダッシュボード</a></li>
                     <li><a href="user_management.php">ユーザー管理</a></li>
                     <li><a href="inquiry_management.php">お問い合わせ管理</a></li>
+                    <li><a href="salary_simulator_management.php">年収シミュレーター管理</a></li>                    
                     <li><a href="logout.php" class="action-button">ログアウト</a></li>
                 </ul>
             </nav>

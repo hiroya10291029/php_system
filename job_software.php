@@ -4,7 +4,7 @@ if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !
     header('Location: login.php');
     exit();
 }
-$username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名がセッションにない場合を考慮(絶対あるけどね)
+$username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名がセッションにない場合を考慮
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -36,7 +36,7 @@ $username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名が
     </header>
 
     <main class="main-content">
-        <h1 class="page-title">会社概要</h1>
+        <h1 class="page-title">ソフトウェアエンジニア</h1>
 
         <div class="section-block">
             <h3>ご挨拶</h3>

@@ -1000,3 +1000,107 @@ body {
         font-size: 24px;
     }
 }
+/*==========================================
+    ふきだし
+============================================*/
+ 
+.arrow_answer,
+.arrow_question {
+    position: relative;
+    background: #fff;
+    border: 1px solid #c8c8c8;
+    border-radius: 10px;
+    width:75%;
+    font-size: 14px;
+    padding:3%;
+}
+ 
+.arrow_question {
+    float: right;
+}
+ 
+.arrow_answer:after,
+.arrow_answer:before,
+.arrow_question:after,
+.arrow_question:before {
+    top: 30%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+ 
+.arrow_question:after,
+.arrow_question:before {
+    right: 100%;
+}
+ 
+.arrow_answer:after,
+.arrow_answer:before{
+     left: 100%;
+}
+ 
+.arrow_answer:after,
+.arrow_question:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-width: 8px;
+    margin-top: -8px;
+}
+ 
+.arrow_answer:after{
+    border-left-color: #fff;
+}
+ 
+.arrow_question:after{
+    border-right-color: #fff;
+     
+}
+ 
+.arrow_answer:before,
+.arrow_question:before {
+    border-color: rgba(200, 200, 200, 0);
+    border-width: 8px;
+    margin-top: -8px;
+}
+ 
+.arrow_answer:before{
+    border-left-color: #c8c8c8;
+}
+ 
+.arrow_question:before {
+    border-right-color: #c8c8c8;    
+}
+ 
+.question_image{
+     float: left;
+     width:15%;
+}
+ 
+.answer_image{
+     float: right;
+     width:15%;
+}
+ 
+.answer_image img,
+.question_image img{
+    border-radius: 50px;
+    display: block;
+    margin: 0 auto;
+    max-width: 60px;
+    width: 100%;
+}
+ 
+.question_Box .name {
+    text-align: center;
+    font-size: 12px;
+}
+.question_Box{
+     width: 100%;
+     overflow: hidden;
+     margin-bottom: 8px;
+}
+.question_Box:nth-child(even){
+     margin-bottom: 25px;
+}

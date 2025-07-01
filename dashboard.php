@@ -299,13 +299,16 @@ ini_set('display_errors', 1);
                     <h3>ソフトウェアエンジニア</h3>
                     <p>Webアプリケーション、モバイルアプリ、バックエンドシステムなど、多岐にわたる開発を担当します。最新技術を積極的に取り入れ、高品質なコードを生み出します。</p>
                     <div class="button-group">
-                        <a href="contact.php?job=ソフトウェアエンジニア" class="action-button">応募する</a>
+                        <a href="job_software.php?job=ソフトウェアエンジニア" class="action-button">ジョブ紹介</a>                    
+                        <a href="contact.php?job=ソフトウェアエンジニア" class="action-button">応募する</a>                    
+
                     </div>
                 </div>
                 <div class="job-card">
                     <h3>データサイエンティスト</h3>
                     <p>大量のデータから価値あるインサイトを抽出し、ビジネス戦略の立案をサポートします。機械学習モデルの開発やデータ可視化ツールの構築も行います。</p>
                     <div class="button-group">
+                        <a href="job_data.php?job=データサイエンティスト" class="action-button">ジョブ紹介</a>                          
                         <a href="contact.php?job=データサイエンティスト" class="action-button">応募する</a>
                     </div>
                 </div>
@@ -313,6 +316,7 @@ ini_set('display_errors', 1);
                     <h3>プロジェクトマネージャー</h3>
                     <p>ソフトウェア開発プロジェクトの計画、実行、監視、完了までを一貫して管理します。チームと顧客の橋渡し役となり、プロジェクトを成功に導きます。</p>
                     <div class="button-group">
+                        <a href="job_project.php?job=プロジェクトマネージャー" class="action-button">ジョブ紹介</a>                          
                         <a href="contact.php?job=プロジェクトマネージャー" class="action-button">応募する</a>
                     </div>
                 </div>
@@ -320,6 +324,7 @@ ini_set('display_errors', 1);
                     <h3>UI/UXデザイナー</h3>
                     <p>ユーザーが直感的で快適に操作できるインターフェースを設計し、ユーザー体験を最適化します。デザイン思考に基づき、プロダクトの魅力を最大限に引き出します。</p>
                     <div class="button-group">
+                        <a href="job_designg.php?job=UI/UXデザイナー" class="action-button">ジョブ紹介</a>                          
                         <a href="contact.php?job=UI/UXデザイナー" class="action-button">応募する</a>
                     </div>
                 </div>
@@ -327,6 +332,7 @@ ini_set('display_errors', 1);
                     <h3>インフラエンジニア</h3>
                     <p>システムの安定稼働を支える基盤（サーバー、ネットワーク、データベースなど）の設計、構築、運用保守を担当します。クラウド技術を活用し、堅牢なインフラを構築します。</p>
                     <div class="button-group">
+                        <a href="job_infra.php?job=インフラエンジニア" class="action-button">ジョブ紹介</a>                          
                         <a href="contact.php?job=インフラエンジニア" class="action-button">応募する</a>
                     </div>
                 </div>
@@ -334,6 +340,7 @@ ini_set('display_errors', 1);
                     <h3>品質保証エンジニア (QA)</h3>
                     <p>開発されたソフトウェアやシステムの品質を確保するためのテスト計画、実行、改善を担当します。ユーザーに最高の体験を提供するため、品質向上に貢献します。</p>
                     <div class="button-group">
+                        <a href="job_quality.php?job=品質保証エンジニア" class="action-button">ジョブ紹介</a>                          
                         <a href="contact.php?job=品質保証エンジニア" class="action-button">応募する</a>
                     </div>
                 </div>

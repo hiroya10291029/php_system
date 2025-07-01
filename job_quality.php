@@ -4,7 +4,7 @@ if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !
     header('Location: login.php');
     exit();
 }
-$username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名がセッションにない場合を考慮(絶対あるけどね)
+$username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名がセッションにない場合を考慮
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -36,15 +36,28 @@ $username = htmlspecialchars($_SESSION['username'] ?? ''); // ユーザー名が
     </header>
 
     <main class="main-content">
-        <h1 class="page-title">会社概要</h1>
+        <h1 class="page-title">品質保証エンジニア(QA)</h1>
 
-        <div class="section-block">
-            <h3>ご挨拶</h3>
-            <p>当社は20XX年の創業以来、「テクノロジーで社会を豊かに」ってミッションを掲げ、
-お客様のビジネスの、そこのキミの悩みを解決する革新的なソリューションを提供してきました。変化の激しい現代に私たちは常に最先端の技術を貪欲にお客様に真の価値を創造し続けることをお約束します。</p>
-            <p>代表取締役社長：永野</p>
-        </div>
-
+		<div class="question_Box">
+		    <div class="answer_image"><img src="img/picuture_queston.png">
+		        <p class="name">
+		        コダック
+		        </p>
+		    </div>
+		    <div class="arrow_answer">
+		        コダコダコダコダコダコダコダ～～
+		    </div>
+		</div>
+		<div class="question_Box">
+		    <div class="question_image"><img src="img/picuture_queston0.png">
+		        <p class="name">
+		        ピカ様
+		        </p>
+		</div>
+		    <div class="arrow_question">
+		        ピカピカピカピカピカピカピカ～
+		    </div>
+		</div>						
         <div class="section-block">
             <h3>企業理念</h3>
             <ul>

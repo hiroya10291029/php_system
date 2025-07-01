@@ -225,5 +225,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($message_status, '失敗し�
             updateSubject();
         });
     </script>
+        <a href="salary_simulator.php" class="salary-simulator-button">
+        年収シミュレーター
+    </a>
 </body>
 </html>

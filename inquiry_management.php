@@ -9,16 +9,12 @@ if (!isset($_SESSION['user_authenticated']) || $_SESSION['user_authenticated'] !
 
 $username_display = htmlspecialchars($_SESSION['username'] ?? '管理者');
 
-// データベース接続ファイルを読み込む
+// データベース接続ファイルを読み込む(DB名やpasswordなどを取得)
 require_once 'db_connect.php'; // ここを追記
 
 $error_message = '';
 
-// ===============================================
-// ★ここから追加・修正するPHPコード★
-// ===============================================
-
-// お問い合わせ種別の選択肢を定義 (contact.php と同期)
+// お問い合わせ種別の選択肢を定義 (contact.php と同期)プルダウンの中身をつめつめ
 $inquiry_types = [
     '' => '全てのお問い合わせ種別', // 検索用に追加
     '採用に関するお問い合わせ' => '採用に関するお問い合わせ',
@@ -31,7 +27,7 @@ $inquiry_types = [
     '品質保証エンジニア' => '品質保証エンジニア'
 ];
 
-// ステータスの選択肢を定義
+// ステータスの選択肢を定義 DBとの対応を記載
 $status_options = [
     '' => '全てのステータス',
     '0' => '未対応',
@@ -39,7 +35,6 @@ $status_options = [
     '2' => '完了',
     '3' => 'クローズ'
 ];
-
 
 // 検索条件の取得
 $search_keyword = $_GET['search_keyword'] ?? '';
@@ -109,6 +104,7 @@ if ($result && $result->num_rows > 0) {
 $conn->close();
 
 // ステータス表示用のヘルパー関数
+//JavaScriptのgetStatusTextと同期
 function getStatusText($status_code) {
     switch ($status_code) {
         case 0: return '未対応';
@@ -406,9 +402,9 @@ function getStatusText($status_code) {
             <a href="admin_dashboard.php" class="logo">株式会社テストシステム (管理者)</a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="admin_dashboard.php">ダッシュボード</a></li>
                     <li><a href="user_management.php">ユーザー管理</a></li>
                     <li><a href="inquiry_management.php">お問い合わせ管理</a></li>
+                    <li><a href="salary_simulator_management.php">年収シミュレーター管理</a></li>                    
                     <li><a href="logout.php" class="action-button">ログアウト</a></li>
                 </ul>
             </nav>
@@ -700,7 +696,7 @@ function getStatusText($status_code) {
             });
         }
 
-        // PHPのgetStatusText関数と同期するJavaScript版
+        // PHPのgetStatusText関数と同期するJavaScript版　DBのstatusCodeと一致するもの
         function getStatusText(statusCode) {
             switch (parseInt(statusCode)) {
                 case 0: return '未対応';
